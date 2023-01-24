@@ -12,6 +12,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
-          repository: TheGrandWazoo/freenas-proxmox-packer
+          repository: eCiceron/freenas-proxmox-packer
           event-type: build_push
           client-payload: '{"ref" : "${{ github.ref }}", "sha": "${{ github.sha }}"}'

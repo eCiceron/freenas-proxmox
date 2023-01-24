@@ -128,8 +128,10 @@ sub run_lun_command {
 
     syslog("info",(caller(0))[3] . " : $method(@params)");
 
-    if(!defined($scfg->{'freenas_user'}) || !defined($scfg->{'freenas_password'})) {
-        die "Undefined freenas_user and/or freenas_password.";
+    if (!defined($scfg->{'freenas_api_token'})) {
+        if(!defined($scfg->{'freenas_user'}) || !defined($scfg->{'freenas_password'})) {
+            die "Undefined freenas_user and/or freenas_password.";
+        }
     }
 
     if (!defined $freenas_server_list->{defined($scfg->{freenas_apiv4_host}) ? $scfg->{freenas_apiv4_host} : $scfg->{portal}}) {
@@ -341,7 +343,14 @@ sub freenas_api_connect {
     }
     $freenas_server_list->{$apihost}->setHost($scheme . '://' . $apihost);
     $freenas_server_list->{$apihost}->addHeader('Content-Type', 'application/json');
-    $freenas_server_list->{$apihost}->addHeader('Authorization', 'Basic ' . encode_base64($scfg->{freenas_user} . ':' . $scfg->{freenas_password}));
+
+    #$freenas_server_list->{$apihost}->addHeader('Authorization', 'Basic ' . encode_base64($scfg->{freenas_user} . ':' . $scfg->{freenas_password}));
+    if (defined($scfg->{'freenas_api_token'})) {
+        $freenas_server_list->{$apihost}->addHeader('Authorization', 'Bearer ' . $scfg->{freenas_api_token});
+    } else {
+        $freenas_server_list->{$apihost}->addHeader('Authorization', 'Basic ' . encode_base64($scfg->{freenas_user} . ':' . $scfg->{freenas_password}));
+    }
+
     # If using SSL, don't verify SSL certs
     if ($scfg->{freenas_use_ssl}) {
         $freenas_server_list->{$apihost}->getUseragent()->ssl_opts(verify_hostname => 0);

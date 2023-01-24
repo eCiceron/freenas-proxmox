@@ -29,6 +29,8 @@
 +	    vm.set('hasWriteCacheOption', newVal === 'comstar' || newVal === 'freenas' || newVal === 'istgt');
 +	    if (newVal !== 'freenas') {
 +		me.lookupReference('freenas_use_ssl_field').setValue(false);
++		me.lookupReference('freenas_api_token_field').setValue('');
++		me.lookupReference('freenas_api_token_field').allowBlank = true;
 +		me.lookupReference('freenas_apiv4_host_field').setValue('');
 +		me.lookupReference('freenas_user_field').setValue('');
 +		me.lookupReference('freenas_user_field').allowBlank = true;
@@ -37,8 +39,9 @@
 +		me.lookupReference('freenas_confirmpw_field').setValue('');
 +		me.lookupReference('freenas_confirmpw_field').allowBlank = true;
 +	    } else {
-+		me.lookupReference('freenas_user_field').allowBlank = false;
-+		me.lookupReference('freenas_password_field').allowBlank = false;
++		me.lookupReference('freenas_user_field').allowBlank = true;
++		me.lookupReference('freenas_password_field').allowBlank = true;
++		me.lookupReference('freenas_api_token_field').allowBlank = true;
 +		me.lookupReference('freenas_confirmpw_field').allowBlank = false;
 +	    }
  	},
@@ -107,6 +110,7 @@
 +		bind: {
 +		    hidden: '{!isFreeNAS}'
 +		},
+ 		allowBlank: true,
 +	    },
  	];
  
@@ -148,6 +152,18 @@
 +	    },
 +	    {
 +		xtype: 'proxmoxtextfield',
++		name: 'freenas_api_token',
++		reference: 'freenas_api_token_field',
++		value: '',
++		editable: true,
++		emptyText: Proxmox.Utils.noneText,
++		bind: {
++		    hidden: '{!isFreeNAS}'
++		},
++		fieldLabel: gettext('API Token (EXPRIMENTAL)'),
++	    },
++	    {
++		xtype: 'proxmoxtextfield',
 +		name: 'freenas_password',
 +		reference: 'freenas_password_field',
 +		inputType: me.isCreate ? '' : 'password',
@@ -163,6 +179,7 @@
 +			f.up().down('field[name=freenas_confirmpw]').validate();
 +		    }
 +		},
+ 		allowBlank: true,
 +	    },
 +	    {
 +		xtype: 'proxmoxtextfield',
@@ -184,6 +201,7 @@
 +		    }
 +		    return true;
 +		},
+ 		allowBlank: true,
  	    },
  	];
  

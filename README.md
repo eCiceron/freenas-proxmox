@@ -1,7 +1,11 @@
 # TrueNAS ZFS over iSCSI interface  [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TCLNEMBUYQUXN&source=url)
 
-### Updates 2022-06-04<br/>  - New Repos available. See [!ATTENTION!](#NewRepo) below.<br/>  - Support for TrueNAS 13 is available<br/>  - Patched for issues with TrueNAS-Scale paths that had more then one level (e.g. Tank/Disk/vDisks) when converting slashes to dashes.
-#### Roadmap
+### Modified by eCiceron AB 2023-01-24 
+* Added support for new V2 Authentication token
+- Jim Nelin (jim.nelin@eciceron.com) 
+
+## Updates 2022-06-04<br/>  - New Repos available. See [!ATTENTION!](#NewRepo) below.<br/>  - Support for TrueNAS 13 is available<br/>  - Patched for issues with TrueNAS-Scale paths that had more then one level (e.g. Tank/Disk/vDisks) when converting slashes to dashes.
+### Roadmap
 * Fix automated builds.
   * Beta - 'testing' repo component.
   * Production - 'main' repo component.

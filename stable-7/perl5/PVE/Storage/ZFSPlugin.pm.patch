@@ -76,6 +76,10 @@
 +	    description => "FreeNAS API access via SSL",
 +	    type => 'boolean',
 +	},
++	freenas_api_token => {
++	    description => "FreeNAS API Token",
++	    type => 'string',
++	},
 +	freenas_apiv4_host => {
 +	    description => "FreeNAS API Host",
 +	    type => 'string',
@@ -100,6 +104,7 @@
 +	freenas_user => { optional => 1 },
 +	freenas_password => { optional => 1 },
 +	freenas_use_ssl => { optional => 1 },
++	freenas_api_token => { optional => 1 },
 +	freenas_apiv4_host => { optional => 1 },
  	lio_tpg => { optional => 1 },
  	content => { optional => 1 },
