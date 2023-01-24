@@ -116,7 +116,7 @@
 +    # Multipath enhancement
 +    eval {
 +	my $wwid = $class->zfs_get_wwid_number($scfg, $guid);
-+	syslog(info,"JD: path get_lun_number guid $guid");
++#	syslog(info,"JD: path get_lun_number guid $guid");
 +
 +	if ($wwid =~ /^([-\@\w.]+)$/) {
 +	    $wwid = $1;                     # $data now untainted
@@ -140,7 +140,7 @@
 +	    $mapper = '';
 +	}
 +
-+	syslog(info,"Multipath mapper found: $mapper\n");
++#	syslog(info,"Multipath mapper found: $mapper\n");
 +	if ($mapper ne "") {
 +	    $path = "/dev/mapper/$mapper";
 +	    sleep 5;
