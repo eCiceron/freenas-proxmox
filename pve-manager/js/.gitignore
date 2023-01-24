@@ -1,1 +1,6 @@
-/pvemanagerlib.js
+pvemanagerlib.js
+pvemanagerlib.js.orig
+pvemanagerlib.js.patched
+pvemanagerlib.js.rej
+diff
+diff.patch

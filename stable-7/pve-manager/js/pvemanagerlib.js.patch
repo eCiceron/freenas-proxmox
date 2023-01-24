@@ -1,22 +1,22 @@
---- pvemanagerlib.js.orig	2022-03-17 09:08:40.000000000 -0400
-+++ pvemanagerlib.js	2022-04-03 08:54:10.229689187 -0400
-@@ -8068,6 +8068,7 @@
-     alias: ['widget.pveiScsiProviderSelector'],
+--- pvemanagerlib.js.orig	2023-01-24 17:34:31.490768700 +0100
++++ pvemanagerlib.js	2023-01-24 17:39:29.331128600 +0100
+@@ -8294,6 +8294,7 @@
      comboItems: [
  	['comstar', 'Comstar'],
-+	['freenas', 'FreeNAS-API'],
  	['istgt', 'istgt'],
++	['freenas', 'FreeNAS-API'],
  	['iet', 'IET'],
  	['LIO', 'LIO'],
-@@ -49636,6 +49637,7 @@
+     ],
+@@ -52368,6 +52369,7 @@
  	data: {
  	    isLIO: false,
  	    isComstar: true,
-+        isFreeNAS: false,
++		isFreeNAS: false,
  	    hasWriteCacheOption: true,
  	},
      },
-@@ -49648,10 +49650,26 @@
+@@ -52380,10 +52382,27 @@
  	    },
  	},
  	changeISCSIProvider: function(f, newVal, oldVal) {
@@ -29,8 +29,6 @@
 +	    vm.set('hasWriteCacheOption', newVal === 'comstar' || newVal === 'freenas' || newVal === 'istgt');
 +	    if (newVal !== 'freenas') {
 +		me.lookupReference('freenas_use_ssl_field').setValue(false);
-+		me.lookupReference('freenas_api_token_field').setValue('');
-+		me.lookupReference('freenas_api_token_field').allowBlank = true;
 +		me.lookupReference('freenas_apiv4_host_field').setValue('');
 +		me.lookupReference('freenas_user_field').setValue('');
 +		me.lookupReference('freenas_user_field').allowBlank = true;
@@ -40,22 +38,22 @@
 +		me.lookupReference('freenas_confirmpw_field').allowBlank = true;
 +	    } else {
 +		me.lookupReference('freenas_user_field').allowBlank = true;
-+		me.lookupReference('freenas_password_field').allowBlank = true;
 +		me.lookupReference('freenas_api_token_field').allowBlank = true;
-+		me.lookupReference('freenas_confirmpw_field').allowBlank = false;
++		me.lookupReference('freenas_password_field').allowBlank = true;
++		me.lookupReference('freenas_confirmpw_field').allowBlank = true;
 +	    }
  	},
      },
  
-@@ -49669,6 +49687,7 @@
+@@ -52401,6 +52420,7 @@
      },
  
      setValues: function(values) {
-+        values.freenas_confirmpw = values.freenas_password;
++	values.freenas_confirmpw = values.freenas_password;
  	values.writecache = values.nowritecache ? 0 : 1;
  	this.callParent([values]);
      },
-@@ -49685,7 +49704,7 @@
+@@ -52417,7 +52437,7 @@
  		allowBlank: false,
  	    },
  	    {
@@ -64,7 +62,7 @@
  		name: 'pool',
  		value: '',
  		fieldLabel: gettext('Pool'),
-@@ -49695,11 +49714,11 @@
+@@ -52427,11 +52447,11 @@
  		xtype: me.isCreate ? 'textfield' : 'displayfield',
  		name: 'blocksize',
  		value: '4k',
@@ -78,7 +76,7 @@
  		name: 'target',
  		value: '',
  		fieldLabel: gettext('Target'),
-@@ -49710,9 +49729,34 @@
+@@ -52442,9 +52462,34 @@
  		name: 'comstar_tg',
  		value: '',
  		fieldLabel: gettext('Target group'),
@@ -86,8 +84,8 @@
 +		bind: {
 +		    hidden: '{!isComstar}'
 +		},
-+		allowBlank: true,
-+	    },
+ 		allowBlank: true,
+ 	    },
 +	    {
 +		xtype: 'proxmoxcheckbox',
 +		name: 'freenas_use_ssl',
@@ -110,12 +108,11 @@
 +		bind: {
 +		    hidden: '{!isFreeNAS}'
 +		},
-+		allowBlank: true,
 +	    },
  	];
  
  	me.column2 = [
-@@ -49742,7 +49786,9 @@
+@@ -52474,7 +52519,9 @@
  		xtype: me.isCreate ? 'textfield' : 'displayfield',
  		name: 'comstar_hg',
  		value: '',
@@ -126,7 +123,7 @@
  		fieldLabel: gettext('Host group'),
  		allowBlank: true,
  	    },
-@@ -49750,9 +49796,62 @@
+@@ -52482,9 +52529,77 @@
  		xtype: me.isCreate ? 'textfield' : 'displayfield',
  		name: 'lio_tpg',
  		value: '',
@@ -149,6 +146,7 @@
 +		    hidden: '{!isFreeNAS}'
 +		},
 +		fieldLabel: gettext('API IPv4 Host'),
++		allowBlank: true
 +	    },
 +	    {
 +		xtype: 'proxmoxtextfield',
@@ -160,8 +158,8 @@
 +		bind: {
 +		    hidden: '{!isFreeNAS}'
 +		},
-+		allowBlank: true,
-+		fieldLabel: gettext('API Token (EXPRIMENTAL)'),
++		fieldLabel: gettext('TrueNAS API Token v2'),
++		allowBlank: true
 +	    },
 +	    {
 +		xtype: 'proxmoxtextfield',
@@ -175,12 +173,12 @@
 +		    hidden: '{!isFreeNAS}'
 +		},
 +		fieldLabel: gettext('API Password'),
++		allowBlank: true,
 +		change: function(f, value) {
 +		    if (f.rendered) {
 +			f.up().down('field[name=freenas_confirmpw]').validate();
 +		    }
 +		},
-+		allowBlank: true,
 +	    },
 +	    {
 +		xtype: 'proxmoxtextfield',
@@ -202,7 +200,6 @@
 +		    }
 +		    return true;
 +		},
-+		allowBlank: true,
  	    },
  	];
  
