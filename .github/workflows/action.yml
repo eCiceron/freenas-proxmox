@@ -11,7 +11,7 @@ jobs:
       - name: Send dispatch request to 'freenas-proxmox-packer' repo.
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} 
+          #token: ${{ secrets.GITHUB_TOKEN }} 
           repository: eCiceron/freenas-proxmox-packer
           event-type: build_push
           client-payload: '{"ref" : "${{ github.ref }}", "sha": "${{ github.sha }}"}'
