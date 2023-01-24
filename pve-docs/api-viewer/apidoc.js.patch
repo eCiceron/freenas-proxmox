@@ -22,13 +22,6 @@
 +                           "type" : "boolean",
 +                           "typetext" : "<boolean>"
 +                        },
-+                        "freenas_api_token" : {
-+                           "description" : "FreeNAS API Token",
-+                           "format" : "address",
-+                           "optional" : 1,
-+                           "type" : "string",
-+                           "typetext" : "<string>"
-+                        },
 +                        "freenas_apiv4_host" : {
 +                           "description" : "FreeNAS API Host via IPv4",
 +                           "format" : "address",
@@ -75,13 +68,6 @@
 +                     "type" : "boolean",
 +                     "typetext" : "<boolean>"
 +                  },
-+                  "freenas_api_token" : {
-+                     "description" : "FreeNAS API Token for API access",
-+                     "format" : "string",
-+                     "optional" : 1,
-+                     "type" : "string",
-+                     "typetext" : "<string>"
-+                 },
 +                  "freenas_apiv4_host" : {
 +                     "description" : "FreeNAS API Host via IPv4",
 +                     "format" : "address",
