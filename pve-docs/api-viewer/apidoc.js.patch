@@ -81,7 +81,7 @@
 +                     "optional" : 1,
 +                     "type" : "string",
 +                     "typetext" : "<string>"
-                   },
++                 },
 +                  "freenas_apiv4_host" : {
 +                     "description" : "FreeNAS API Host via IPv4",
 +                     "format" : "address",

@@ -86,8 +86,8 @@
 +		bind: {
 +		    hidden: '{!isComstar}'
 +		},
- 		allowBlank: true,
- 	    },
++		allowBlank: true,
++	    },
 +	    {
 +		xtype: 'proxmoxcheckbox',
 +		name: 'freenas_use_ssl',
@@ -110,7 +110,7 @@
 +		bind: {
 +		    hidden: '{!isFreeNAS}'
 +		},
- 		allowBlank: true,
++		allowBlank: true,
 +	    },
  	];
  
@@ -160,6 +160,7 @@
 +		bind: {
 +		    hidden: '{!isFreeNAS}'
 +		},
++		allowBlank: true,
 +		fieldLabel: gettext('API Token (EXPRIMENTAL)'),
 +	    },
 +	    {
@@ -179,7 +180,7 @@
 +			f.up().down('field[name=freenas_confirmpw]').validate();
 +		    }
 +		},
- 		allowBlank: true,
++		allowBlank: true,
 +	    },
 +	    {
 +		xtype: 'proxmoxtextfield',
@@ -201,7 +202,7 @@
 +		    }
 +		    return true;
 +		},
- 		allowBlank: true,
++		allowBlank: true,
  	    },
  	];
  

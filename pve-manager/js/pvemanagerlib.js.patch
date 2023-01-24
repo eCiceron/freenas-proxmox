@@ -110,7 +110,7 @@
 +		bind: {
 +		    hidden: '{!isFreeNAS}'
 +		},
- 		allowBlank: true,
++		allowBlank: true,
 +	    },
  	];
  
@@ -179,7 +179,7 @@
 +			f.up().down('field[name=freenas_confirmpw]').validate();
 +		    }
 +		},
- 		allowBlank: true,
++		allowBlank: true,
 +	    },
 +	    {
 +		xtype: 'proxmoxtextfield',
@@ -201,7 +201,7 @@
 +		    }
 +		    return true;
 +		},
- 		allowBlank: true,
++		allowBlank: true,
  	    },
  	];
  
